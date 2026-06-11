@@ -1,4 +1,6 @@
 import "./styles.css";
-import { test} from "./todo.js";
+import { test as testTodo} from "./todo.js";
+import { test as testProject } from "./project.js";
 
-test()
+testTodo()
+testProject()

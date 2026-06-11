@@ -7,7 +7,7 @@ export default class Todo {
     }
 }
 
-const todoList = []
+export const todoList = []
 
 function createTodo(title,description,dueDate,priority) {
     const todoItem = new Todo({
