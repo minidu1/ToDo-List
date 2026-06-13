@@ -9,13 +9,13 @@ function createNewProject(name){
 function ensureProjectExist(todo){
     if(todo.project in projectList){ //check is project of todo already in the list
         console.log("in list")
-        console.log("project list is", projectList)
+        console.log("old project list is", projectList)
     }
     else{
         console.log("not in list")
         createNewProject(todo.project)
 
-        console.log("project list", projectList)
+        console.log("new project list", projectList)
     }
 }
 
