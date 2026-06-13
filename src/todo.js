@@ -1,22 +1,25 @@
+import { addToProjectList } from "./project.js";
 export default class Todo {
-    constructor({ title, description, dueDate, priority = "low" }) {
+    constructor({ title, description, dueDate, priority = "low", project = "common" }) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.project = project;
     }
 }
 
-export const todoList = []
+// export const todoList = []
 
-function createTodo(title,description,dueDate,priority) {
+function createTodo(title,description,dueDate,priority,project) {
     const todoItem = new Todo({
         title,
         description,
         dueDate,
-        priority
+        priority,
+        project
     })
-    return todoItem
+    return todoItem //return obj to getInput
 }
 
 function getInputs(){
@@ -25,17 +28,25 @@ function getInputs(){
     const description =  "description"
     const dueDate =  "date"
     const priority = "priority"
+    let project 
 
-    const newTodo = createTodo(title,description,dueDate,priority)
-    return newTodo
+    const newTodo = createTodo(title,description,dueDate,priority, project) //get obj
+    return newTodo // return obj to do to addTodo
 }
 
 function addTodoToList(){
-    const newTodo = getInputs()
+    const newTodo = getInputs() //need a returned obj
     todoList.push(newTodo)
 }
 
+function addTodoToAProject(){
+    const newTodo = getInputs() //need a returned obj
+    addToProjectList(newTodo)
+}
+
 export function test() {
-    addTodoToList()
-    console.log(todoList[0].title)
+    // addTodoToList()
+    // console.log(todoList)
+
+    addTodoToAProject()
 }
