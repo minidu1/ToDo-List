@@ -1,4 +1,4 @@
-const projectList = {}
+const projectList = JSON.parse(localStorage.getItem("projects")) || {}
 
 function createNewProject(name){
     projectList[name] =[] //make empty arrays to add projects
@@ -22,22 +22,9 @@ function ensureProjectExist(todo){
 export function addToProjectList(todo){
     ensureProjectExist(todo)
     projectList[todo.project].push(todo)
+    localStorage.setItem("projects", JSON.stringify(projectList))
 }
 
-export function test() {
-    // createNewProject("one")
-    // createNewProject("hello")
-    console.log("final project list is ",projectList)
-
-
-    // console.log(project.prj1)
-    // console.log(second[0])
+export function test(){
+    console.log("final project list  ",projectList)
 }
-
-// let project ={ prj1:[{}, 2], prj2 : []}
-// let second = [{p1:[1,2]}, {p2:[]}]
-
-// TestprojectList = {
-//     "Default" : [todo1, todo2],
-//     "Work" : [todo3]
-// }
