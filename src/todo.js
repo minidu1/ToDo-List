@@ -28,11 +28,11 @@ function addTodoToList(){
 }
 
 export function test() {
-    const todo1 = createTodo("Buy milk", "from store", "2024-01-01", "low", "common")
-    const todo2 = createTodo("Finish project", "odin todo", "2024-01-05", "high", "newProj")
-    const todo3 = createTodo("Read book", "chapter 3", "2024-01-03", "medium", "newProj")
+    // const todo1 = createTodo("Buy milk", "from store", "2024-01-01", "low", "common")
+    // const todo2 = createTodo("Finish project", "odin todo", "2024-01-05", "high", "newProj")
+    // const todo3 = createTodo("Read book", "chapter 3", "2024-01-03", "medium", "newProj")
 
-    addToProjectList(todo1)
-    addToProjectList(todo2)
-    addToProjectList(todo3)
+    // addToProjectList(todo1)
+    // addToProjectList(todo2)
+    // addToProjectList(todo3)
 }

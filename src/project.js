@@ -25,6 +25,25 @@ export function addToProjectList(todo){
     localStorage.setItem("projects", JSON.stringify(projectList))
 }
 
+function getAllProjects(){
+    for (let project in projectList){
+        // const projects  = []
+        // projects.push(project)
+
+        console.log("projects are ", projectList[project])
+        // return projectList[project]
+    }
+}
+
+function getAllTodos(){
+
+}
+// function getProject(projectName){
+//     return(projectList[projectName])
+// }
+
 export function test(){
     console.log("final project list  ",projectList)
+    getAllProjects()
+
 }
