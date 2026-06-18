@@ -27,10 +27,23 @@ export default {
         use: ["style-loader", "css-loader"],
       },
       {
-      test: /\.js$/,
-      enforce: "pre",
-      use: ["source-map-loader"],
-    },
+        test: /\.js$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
+      },
+      // webpack.config.js
+      {
+        test: /\.html$/i,
+        use: ["html-loader"],
+      },
+      {
+        // Automatically injects font assets into the build output
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name][ext]',
+        },
+      },
     ],
   },
 };

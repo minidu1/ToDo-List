@@ -1,3 +1,92 @@
+/* Simple CSS Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-  background-color: rebeccapurple;
+  line-height: 1.5;
+  font-family: Arial, sans-serif;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* code */
+
+:root{
+  --test-boarder: 2px solid black;
+  --header-color: rgb(54, 202, 54);
+  --background-color:rgb(243, 243, 243);
+}
+
+body{
+  background-color: var(--background-color);
+}
+
+div{
+  /* border: var(--test-boarder); */
+
+}
+
+header{
+  border: var(--test-boarder);
+  height: 10vh;
+  background-color: var(--header-color);
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.logo{
+  height: 7vh;
+  margin-left: 10px;
+}
+
+div.name{
+  color: var(--background-color);
+  font-size: 2rem;
+  font-weight: 900;
+  margin-left: 2vw;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+
+  background: rgba(255, 255, 255, 0.20);
+  color: white;
+
+  border: 1px solid rgba(255, 255, 255, 0.503);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  margin-left: auto;
+  margin-right: 2vw;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+button:active {
+  transform: scale(0.98);
 }
