@@ -34,6 +34,13 @@ input, button, textarea, select {
 
 body{
   background-color: var(--background-color);
+  height: 100vh;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  font-family: Arial, sans-serif;
+  border: var(--test-boarder);
 }
 
 div{
@@ -42,11 +49,9 @@ div{
 }
 
 header{
-  border: var(--test-boarder);
   height: 10vh;
   background-color: var(--header-color);
   display: flex;
-  /* justify-content: center; */
   align-items: center;
 }
 
@@ -89,4 +94,24 @@ button:hover {
 
 button:active {
   transform: scale(0.98);
+}
+
+.layout{
+  border: var(--test-boarder);
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  overflow: auto;
+}
+
+.sidebar{
+  border: var(--test-boarder);
+  color: aqua;
+}
+
+.content{
+  border: var(--test-boarder);
+}
+
+footer{
+  border: var(--test-boarder);
 }
