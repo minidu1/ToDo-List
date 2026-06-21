@@ -15,8 +15,26 @@
     </header>
 
     <div class="layout">
-        <aside class="side-bar">
-            aside
+        <aside class="side-bar" role="navigation" aria-label="Main navigation">
+            <div class="side-header">
+                <img class="logo-sm" src="icon.png" alt="App logo">
+                <div class="side-title">ToDo List</div>
+            </div>
+
+            <nav class="nav-buttons" aria-label="Primary actions">
+                <button class="nav-btn home" data-filter="all">Home</button>
+                <button class="nav-btn today" data-filter="today">Today</button>
+                <button class="nav-btn week" data-filter="week">This week</button>
+            </nav>
+
+            <div class="projects" aria-labelledby="projects-heading">
+                <div id="projects-heading" class="project-heading">Projects</div>
+                <div class="project-list" role="list">
+                    <button class="project-item" role="listitem">1st one</button>
+                    <button class="project-item" role="listitem">john</button>
+                    <button class="project-item" role="listitem">uni</button>
+                </div>
+            </div>
         </aside>
         <main class="content">content</main>
     </div>

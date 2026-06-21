@@ -99,19 +99,91 @@ button:active {
 .layout{
   border: var(--test-boarder);
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 260px 1fr;
   overflow: auto;
 }
 
-.sidebar{
-  border: var(--test-boarder);
-  color: aqua;
+.side-bar{
+  background-color: rgb(0, 110, 255);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  min-height: 100%;
+}
+
+.side-header{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 6px;
+}
+
+.logo-sm{
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+}
+
+.side-title{
+  color: white;
+  font-weight: 800;
+}
+
+.side-bar button{
+  border-radius: 8px;
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  padding-left: 12px;
+  background: transparent;
+  border: none;
+  color: white;
+}
+
+.side-bar button:focus{
+  outline: 2px solid rgba(255,255,255,0.18);
+}
+
+.projects{
+  padding-top: 6px;
+}
+
+.project-heading{
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+}
+
+.project-list{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 6px 12px 6px;
+}
+
+.project-item{
+  background: rgba(255,255,255,0.03);
+  color: white;
+  border: none;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.project-item:hover{
+  background: rgba(255,255,255,0.08);
 }
 
 .content{
-  border: var(--test-boarder);
+  /* border: var(--test-boarder); */
 }
 
 footer{
   border: var(--test-boarder);
 }
+
