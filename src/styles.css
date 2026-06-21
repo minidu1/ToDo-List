@@ -6,7 +6,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -15,24 +16,33 @@ body {
   font-family: Arial, sans-serif;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
 /* code */
 
-:root{
+:root {
   --test-boarder: 2px solid black;
-  --header-color: rgb(54, 202, 54);
-  --background-color:rgb(243, 243, 243);
+  --background-color: #f8f9fa;
+  --sidebar-color: #354f52;
+  --header-color: #2f3e46;
+  --accent-color: #84a98c;
 }
 
-body{
+body {
   background-color: var(--background-color);
   height: 100vh;
 
@@ -43,24 +53,20 @@ body{
   border: var(--test-boarder);
 }
 
-div{
-  /* border: var(--test-boarder); */
 
-}
-
-header{
+header {
   height: 10vh;
   background-color: var(--header-color);
   display: flex;
   align-items: center;
 }
 
-.logo{
+.logo {
   height: 7vh;
   margin-left: 10px;
 }
 
-div.name{
+div.name {
   color: var(--background-color);
   font-size: 2rem;
   font-weight: 900;
@@ -96,15 +102,14 @@ button:active {
   transform: scale(0.98);
 }
 
-.layout{
-  border: var(--test-boarder);
+.layout {
   display: grid;
   grid-template-columns: 260px 1fr;
   overflow: auto;
 }
 
-.side-bar{
-  background-color: rgb(0, 110, 255);
+.side-bar {
+  background-color: var(--sidebar-color);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -112,27 +117,27 @@ button:active {
   min-height: 100%;
 }
 
-.side-header{
+.side-header {
   display: flex;
   align-items: center;
   gap: 8px;
   padding-bottom: 6px;
 }
 
-.logo-sm{
+.logo-sm {
   width: 36px;
   height: 36px;
   border-radius: 6px;
 }
 
-.side-title{
+.side-title {
   color: white;
   font-weight: 800;
 }
 
-.side-bar button{
+.side-bar button {
   border-radius: 8px;
-  margin: 0;
+  margin: 1px;
   width: 100%;
   text-align: left;
   padding-left: 12px;
@@ -141,15 +146,15 @@ button:active {
   color: white;
 }
 
-.side-bar button:focus{
-  outline: 2px solid rgba(255,255,255,0.18);
+.side-bar button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.40);
 }
 
-.projects{
+.projects {
   padding-top: 6px;
 }
 
-.project-heading{
+.project-heading {
   color: white;
   font-size: 0.95rem;
   font-weight: 700;
@@ -157,15 +162,15 @@ button:active {
   margin-bottom: 6px;
 }
 
-.project-list{
+.project-list {
   display: flex;
   flex-direction: column;
   gap: 6px;
   padding: 0 6px 12px 6px;
 }
 
-.project-item{
-  background: rgba(255,255,255,0.03);
+.project-item {
+  background: rgba(255, 255, 255, 0.03);
   color: white;
   border: none;
   text-align: left;
@@ -175,15 +180,14 @@ button:active {
   font-size: 0.95rem;
 }
 
-.project-item:hover{
-  background: rgba(255,255,255,0.08);
+.project-item:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.content{
+.content {
   /* border: var(--test-boarder); */
 }
 
-footer{
-  border: var(--test-boarder);
+footer {
+  background-color: var(--header-color);
 }
-
