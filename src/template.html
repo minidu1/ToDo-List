@@ -36,7 +36,44 @@
                 </div>
             </div>
         </aside>
-        <main class="content">content</main>
+        <main class="content">
+            <section class="main-list">
+                <!-- Main app content (todo list) goes here -->
+            </section>
+
+            <!-- Modal popup for creating a new ToDo. Toggle visibility with JS by adding/removing the 'hidden' class. -->
+            <div class="modal-overlay hidden" id="todoModal">
+                <div class="todo-modal" role="dialog" aria-modal="true" aria-labelledby="todoModalTitle">
+                    <h2 id="todoModalTitle">Create ToDo</h2>
+
+                    <form class="todo-form" action="#">
+                        <label for="todo-title">Title</label>
+                        <input id="todo-title" name="title" type="text" required />
+
+                        <label for="todo-desc">Description</label>
+                        <textarea id="todo-desc" name="description" rows="4"></textarea>
+
+                        <label for="todo-due">Due date</label>
+                        <input id="todo-due" name="dueDate" type="date" />
+
+                        <label for="todo-priority">Priority</label>
+                        <select id="todo-priority" name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+
+                        <label for="todo-project">Project</label>
+                        <input id="todo-project" name="project" type="text" placeholder="Project name (optional)" />
+
+                        <div class="modal-actions">
+                            <button type="button" class="btn cancel">Cancel</button>
+                            <button type="submit" class="btn create">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
     </div>
     <footer>footer</footer>
 </body>
