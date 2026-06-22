@@ -1,3 +1,5 @@
+import addNewTodo from "./todo.js"
+
 export function setupButtons() {
     const addTodoBtn = document.querySelector(".add-new-todo")
     const cancelBtn = document.querySelector(".cancel")
@@ -33,15 +35,11 @@ function createTodo(e){
     const descValue = document.querySelector("#todo-desc").value.trim()
     const dateValue = document.querySelector("#todo-due").value
     const priorityvalue = document.querySelector("#todo-priority").value
-    const projectValue = document.querySelector("#todo-project").value.trim()
+    const projectValue = document.querySelector("#todo-project").value.trim() || "common" //use project as common if empty string
+    // call addNewTodo in todo.js
+    addNewTodo(titleValue,descValue, dateValue, priorityvalue, projectValue)
 
-    console.log(titleValue)
-    console.log(descValue)
-    console.log(dateValue)
-    console.log(priorityvalue)
-    console.log(projectValue)
-
-
+    resetForm()
 }
 
 function setError(element, message){

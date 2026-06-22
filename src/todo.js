@@ -5,7 +5,7 @@ class Todo {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.project = project;
+        this.project = project ;
     }
 }
 
@@ -22,9 +22,10 @@ function createTodo(title,description,dueDate,priority,project) {
     return todoItem //return obj to getInput
 }
 
-function addTodoToList(){
-    const newTodo = getInputs() //need a returned obj
-    todoList.push(newTodo)
+//get user entered data from ui form
+export default function addNewTodo(title,description,dueDate,priority,project){
+    const newTodo = createTodo(title,description,dueDate,priority,project)
+    addToProjectList(newTodo)
 }
 
 export function test() {
