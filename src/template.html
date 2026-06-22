@@ -10,7 +10,7 @@
 <body>
     <header>
         <img class="logo" src="icon.png" alt="Logo">
-        <div class="name">ToDo List</div>
+        <div class="name">Todo List</div>
         <button class="add-new-todo"><i class="fa-solid fa-circle-plus"></i> Add ToDo</button>
     </header>
 
@@ -47,8 +47,11 @@
                     <h2 id="todoModalTitle">Create ToDo</h2>
 
                     <form class="todo-form" action="#">
-                        <label for="todo-title">Title</label>
-                        <input id="todo-title" name="title" type="text" required />
+                        <div class="input-control">
+                        <label for="todo-title">Title*</label>
+                        <input id="todo-title" name="title" type="text" />
+                        <div class="error"></div>
+                        </div>
 
                         <label for="todo-desc">Description</label>
                         <textarea id="todo-desc" name="description" rows="4"></textarea>
