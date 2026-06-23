@@ -41,6 +41,7 @@ select {
   --header-color: #2f3e46;
   --accent-color: #204628;
   /* --accent-color: #84a98c; */
+  --form-control-color: rebeccapurple;
 }
 
 body {
@@ -105,7 +106,7 @@ button:active {
 
 .layout {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 300px 1fr;
   overflow: auto;
 }
 
@@ -186,15 +187,11 @@ button:active {
 }
 
 .content {
-  /* border: var(--test-boarder); */
+  background-color: var(--background-color);
 }
 
 footer {
   background-color: var(--header-color);
-}
-
-form.add-todo-form{
-
 }
 
 /* Modal / popup styles for Add ToDo */
@@ -271,3 +268,78 @@ form.add-todo-form{
   color: white;
   border: 1px solid rgba(0,0,0,0.06);
 }
+
+/*body */
+.main-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  margin: 40px;
+}
+.todo{
+  height: 60px;
+  /* margin-left: 20px; */
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  
+
+  background-color: #d8e8d8;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.48);
+}
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 1em;
+  height: 1em;
+  border: 0.01em solid currentColor;
+  border-radius: 0.15em;
+  /* transform: translateY(-0.075em); */
+
+  display: grid;
+  place-content: center;
+}
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--accent-color);
+
+   transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+.todo .check-area{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+}
+.todo .date{
+  margin-right: 4vw;
+}
+.todo .delete{
+  margin-right: 15px;
+}
+/* .dlt-btn {
+  background: none;
+  color: black;
+  border: none;
+  padding: 0.7em;
+  cursor: pointer;
+} */
+/* button hadanna thiyenawa */

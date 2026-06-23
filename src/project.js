@@ -26,24 +26,29 @@ export function addToProjectList(todo){
 }
 
 function getAllProjects(){
+    const projects  = []
     for (let project in projectList){
         // const projects  = []
-        // projects.push(project)
+        projects.push(project)
 
         console.log("projects are ", projectList[project])
         // return projectList[project]
     }
+    // console.log("projects are ", projects)
+    return projects
 }
 
 function getAllTodos(){
-
+    const projects = getAllProjects()
+    console.log(projects)
 }
 // function getProject(projectName){
 //     return(projectList[projectName])
 // }
 
 export function test(){
-    console.log("final project list  ",projectList)
-    getAllProjects()
+    // console.log("final project list  ",projectList)
+    // getAllProjects()
+    getAllTodos()
 
 }
