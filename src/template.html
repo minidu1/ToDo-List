@@ -11,7 +11,7 @@
     <header>
         <img class="logo" src="icon.png" alt="Logo">
         <div class="name">Todo List</div>
-        <button class="add-new-todo"><i class="fa-solid fa-circle-plus"></i> Add ToDo</button>
+        <button class="add-new-todo btn"><i class="fa-solid fa-circle-plus"></i> Add ToDo</button>
     </header>
 
     <div class="layout">
@@ -22,17 +22,17 @@
             </div>
 
             <nav class="nav-buttons" aria-label="Primary actions">
-                <button class="nav-btn home" data-filter="all">Home</button>
-                <button class="nav-btn today" data-filter="today">Today</button>
-                <button class="nav-btn week" data-filter="week">This week</button>
+                <button class="btn nav-btn home" data-filter="all">Home</button>
+                <button class="btn nav-btn today" data-filter="today">Today</button>
+                <button class="btn nav-btn week" data-filter="week">This week</button>
             </nav>
 
             <div class="projects" aria-labelledby="projects-heading">
                 <div id="projects-heading" class="project-heading">Projects</div>
                 <div class="project-list" role="list">
-                    <button class="project-item" role="listitem">1st one</button>
-                    <button class="project-item" role="listitem">john</button>
-                    <button class="project-item" role="listitem">uni</button>
+                    <button class="btn project-item" role="listitem">1st one</button>
+                    <button class="btn project-item" role="listitem">john</button>
+                    <button class="btn project-item" role="listitem">uni</button>
                 </div>
             </div>
         </aside>
@@ -45,8 +45,8 @@
                         <span class="title">Make breakfirst</span>
                     </label>
                     <span class="date">date</span>
-                    <i class="fa-regular fa-pen-to-square edit"></i>
-                    <i class="fa-regular fa-trash-can delete"></i> 
+                    <button class="action-btn"><i class="fa-regular fa-pen-to-square edit"></i></button>
+                    <button class="action-btn"><i class="fa-regular fa-trash-can delete"></i></button> 
                 </div>
                 <div class="todo"><input type="checkbox"> eat breackfirst</div>
             </section>

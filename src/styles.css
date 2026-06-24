@@ -75,7 +75,7 @@ div.name {
   margin-left: 2vw;
 }
 
-button {
+.btn {
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
 
@@ -251,13 +251,13 @@ footer {
   justify-content: flex-end;
   margin-top: 6px;
 }
-.btn{
+/* form .btn{
   padding: 8px 12px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
   font-weight: 600;
-}
+} */
 .btn.cancel{
   background: transparent;
   border: 1px solid #ccc;
@@ -279,8 +279,7 @@ footer {
 }
 .todo{
   height: 60px;
-  /* margin-left: 20px; */
-  padding-left: 20px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   gap: 1em;
@@ -333,13 +332,13 @@ input[type="checkbox"]:checked::before {
   margin-right: 4vw;
 }
 .todo .delete{
-  margin-right: 15px;
+  /* margin-right: 15px; */
 }
-/* .dlt-btn {
+.action-btn {
   background: none;
   color: black;
   border: none;
   padding: 0.7em;
+  /* margin-right: 20px; */
   cursor: pointer;
-} */
-/* button hadanna thiyenawa */
+}
