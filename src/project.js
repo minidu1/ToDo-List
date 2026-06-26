@@ -27,7 +27,7 @@ export function addToProjectList(todo){
 
 function getAllProjects(){
     const projects  = []
-    for (let project in projectList){
+    for (const project in projectList){
         // const projects  = []
         projects.push(project)
 
@@ -40,7 +40,16 @@ function getAllProjects(){
 
 function getAllTodos(){
     const projects = getAllProjects()
-    console.log(projects)
+    const todos = []
+    for (const project of projects){
+        // console.log(projectList[project])
+        for (const todo of projectList[project]){
+            // console.log(todo)
+            todos.push(todo)
+        }
+    }
+    console.log(todos)
+    return todos
 }
 // function getProject(projectName){
 //     return(projectList[projectName])
