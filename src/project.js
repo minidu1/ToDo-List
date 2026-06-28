@@ -8,38 +8,36 @@ function createNewProject(name){
 //check todo's project already in projectList, if not add it to project list
 function ensureProjectExist(todo){
     if(todo.project in projectList){ //check is project of todo already in the list
-        console.log("in list")
-        console.log("old project list is", projectList)
+        // console.log("project is in list")
+        // console.log("old project list is", projectList)
     }
     else{
-        console.log("not in list")
+        // console.log("project is not in list")
         createNewProject(todo.project)
 
-        console.log("new project list", projectList)
+        // console.log("new project list", projectList)
     }
 }
 
 export function addToProjectList(todo){
     ensureProjectExist(todo)
-    projectList[todo.project].push(todo)
+    projectList[todo.project].push(todo) // add new todo to projectlist(inside the project user gave [todo.project])
     localStorage.setItem("projects", JSON.stringify(projectList))
 }
 
 function getAllProjects(){
     const projects  = []
     for (const project in projectList){
-        // const projects  = []
         projects.push(project)
 
-        console.log("projects are ", projectList[project])
-        // return projectList[project]
+        // console.log("projects are ", projectList[project])
     }
     // console.log("projects are ", projects)
     return projects
 }
 
 export function getAllTodos(){
-    const projects = getAllProjects()
+    const projects = getAllProjects() //give all project name issnide an array
     const todos = []
     for (const project of projects){
         // console.log(projectList[project])
@@ -48,12 +46,9 @@ export function getAllTodos(){
             todos.push(todo)
         }
     }
-    console.log(todos)
+    // console.log(todos)
     return todos
 }
-// function getProject(projectName){
-//     return(projectList[projectName])
-// }
 
 export function test(){
     // console.log("final project list  ",projectList)

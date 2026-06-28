@@ -10,9 +10,9 @@ class Todo {
 }
 
 // export const todoList = []
-
+//create the todo
 function createTodo(title,description,dueDate,priority,project) {
-    const todoItem = new Todo({
+    const todoItem = new Todo({ //call todo class
         title,
         description,
         dueDate,
@@ -25,7 +25,7 @@ function createTodo(title,description,dueDate,priority,project) {
 //get user entered data from ui form
 export default function addNewTodo({titleValue, descValue, dateValue, priorityvalue, projectValue}){
     const newTodo = createTodo(titleValue, descValue, dateValue, priorityvalue, projectValue)
-    addToProjectList(newTodo) 
+    addToProjectList(newTodo) //add todo obj to a project in project.js
 }
 
 export function test() {

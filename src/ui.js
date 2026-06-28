@@ -4,13 +4,13 @@ import { getAllTodos } from "./project.js"
 export function setupButtons() {
     const addTodoBtn = document.querySelector(".add-new-todo")
     const cancelBtn = document.querySelector(".cancel")
-    // const createBtn = document.querySelector(".create")
     const form = document.querySelector(".todo-form")
+    const homeBtn = document.querySelector(".home")
 
     addTodoBtn.addEventListener("click", showAddTodoForm)
     cancelBtn.addEventListener("click", cancelForm)
     form.addEventListener("submit", handleSubmit)
-    // createBtn.addEventListener("click", hideForm)
+    homeBtn.addEventListener("click", createHome)
 }
 //show form when click the add todo button
 function showAddTodoForm() {
@@ -76,7 +76,14 @@ function validateForm(e) {
     }
 }
 
-export function createTodoCards(){
+function clearCards() {
+    const mainListSec = document.querySelector(".main-list")
+    mainListSec.textContent = ""
+}
+
+function createTodoCard(todo) {
+    console.log(todo)
+    const {title, description, dueDate, priority, project} = todo
     const mainListSec = document.querySelector(".main-list")
     const todoDiv = document.createElement("div")
     const checkAreaLabel = document.createElement("label")
@@ -90,7 +97,7 @@ export function createTodoCards(){
 
     todoDiv.classList.add("todo")
     checkAreaLabel.classList.add("check-area")
-    checkbox.type= "checkbox"
+    checkbox.type = "checkbox"
     titleSpan.classList.add("title")
     dateSpan.classList.add("date")
     deleteBtn.classList.add("action-btn", "delete")
@@ -98,8 +105,12 @@ export function createTodoCards(){
     editIcon.classList.add("fa-regular", "fa-pen-to-square")
     deleteIcon.classList.add("fa-regular", "fa-trash-can")
 
-    titleSpan.textContent = "title bro"
-    dateSpan.textContent = "sada"
+    titleSpan.textContent = title
+    if (dueDate == ""){
+        dateSpan.textContent = "Unknown"
+    }
+    else{dateSpan.textContent = dueDate}
+    
 
     checkAreaLabel.append(checkbox, titleSpan)
     editBtn.appendChild(editIcon)
@@ -108,13 +119,25 @@ export function createTodoCards(){
     mainListSec.appendChild(todoDiv)
 }
 
+function createHome() {
+    clearCards()
+    const todos = getAllTodos()
+    todos.forEach(createTodoCard)
+
+}
 
 function handleSubmit(e) {
     const isValid = validateForm(e)
     if (!isValid) return //stop function running if form isnt validated
 
-    const values  = getValues()
-    addNewTodo(values)
-    
+    const values = getValues()
+    addNewTodo(values) //go to todo.js and create a todo obj
+
     resetForm()
+}
+
+export function test() {
+    setupButtons()
+    // createTodoCard()
+    createHome()
 }
