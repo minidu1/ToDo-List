@@ -23,9 +23,9 @@ function createTodo(title,description,dueDate,priority,project) {
 }
 
 //get user entered data from ui form
-export default function addNewTodo(title,description,dueDate,priority,project){
-    const newTodo = createTodo(title,description,dueDate,priority,project)
-    addToProjectList(newTodo)
+export default function addNewTodo({titleValue, descValue, dateValue, priorityvalue, projectValue}){
+    const newTodo = createTodo(titleValue, descValue, dateValue, priorityvalue, projectValue)
+    addToProjectList(newTodo) 
 }
 
 export function test() {

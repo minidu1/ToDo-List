@@ -2,8 +2,9 @@ import "./styles.css";
 import '@fortawesome/fontawesome-free/css/all.css';
 import { test as testTodo} from "./todo.js";
 import { test as testProject } from "./project.js";
-import { setupButtons } from "./ui.js";
+import { setupButtons,createTodoCards } from "./ui.js";
 
 testTodo()
 testProject()
 setupButtons()
+createTodoCards()

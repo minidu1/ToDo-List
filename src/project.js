@@ -38,7 +38,7 @@ function getAllProjects(){
     return projects
 }
 
-function getAllTodos(){
+export function getAllTodos(){
     const projects = getAllProjects()
     const todos = []
     for (const project of projects){
