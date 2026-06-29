@@ -5,12 +5,16 @@ export function setupButtons() {
     const addTodoBtn = document.querySelector(".add-new-todo")
     const cancelBtn = document.querySelector(".cancel")
     const form = document.querySelector(".todo-form")
-    const homeBtn = document.querySelector(".home")
+    const navButtons = document.querySelectorAll(".nav-btn")
 
     addTodoBtn.addEventListener("click", showAddTodoForm)
     cancelBtn.addEventListener("click", cancelForm)
     form.addEventListener("submit", handleSubmit)
-    homeBtn.addEventListener("click", createHome)
+    // homeBtn.addEventListener("click", createHome)
+    // navButtons.forEach(navButton => {
+    //     navButton.addEventListener("click", e => console.log(e))
+    // })
+    globalEventListner("click", ".nav-btn", projectEventHandler)
 }
 //show form when click the add todo button
 function showAddTodoForm() {
@@ -133,7 +137,28 @@ function handleSubmit(e) {
     const values = getValues()
     addNewTodo(values) //go to todo.js and create a todo obj
 
+    
     resetForm()
+}
+
+//add global event listner on document so new buttons also get the listner and can use for any button
+function globalEventListner(type,selector,callback){ //type=click , selector is the button we need, callback function.(eventlistners blog webdevsimplified)
+    document.addEventListener(
+        type,
+        e =>{
+            if (e.target.matches(selector)) callback(e) //methana {} danna one na ekama peliya nisa
+        }
+    )
+}
+
+function projectEventHandler(e){
+    if (e.target.dataset.filter === "home"){
+        createHome()
+    }
+
+    if (e.target.dataset.filter === "today"){
+        clearCards()
+    }
 }
 
 export function test() {
