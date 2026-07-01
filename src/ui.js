@@ -1,5 +1,8 @@
 import addNewTodo from "./todo.js"
 import { getAllTodos } from "./project.js"
+import {isToday, isThisWeek} from "date-fns"
+
+let activeProject = "home"
 
 export function setupButtons() {
     const addTodoBtn = document.querySelector(".add-new-todo")
@@ -123,11 +126,44 @@ function createTodoCard(todo) {
     mainListSec.appendChild(todoDiv)
 }
 
-function createHome() {
-    clearCards()
-    const todos = getAllTodos()
+function createHome(todos) {
     todos.forEach(createTodoCard)
 
+}
+
+function createToday(todos){
+    const filteredTodos = todos.filter(todo => filterToday(todo))
+    filteredTodos.forEach(createTodoCard)
+}
+
+function createWeek(todos){
+    const filteredTodos = todos.filter(todo => filterWeek(todo))
+    filteredTodos.forEach(createTodoCard)
+}
+
+function filterToday(todo){
+    const todoDate = new Date(todo.dueDate)
+    return isToday(todoDate)
+}
+
+function filterWeek(todo){
+    const todoDate = new Date(todo.dueDate)
+    return isThisWeek(todoDate)
+}
+
+function renderTodos(filter){
+    clearCards()
+    const todos = getAllTodos()
+    if(filter === "home"){
+        createHome(todos)
+        
+    }
+    if(filter === "today"){
+        createToday(todos)
+    }
+    if(filter === "week"){
+        createWeek(todos)
+    }
 }
 
 function handleSubmit(e) {
@@ -137,7 +173,9 @@ function handleSubmit(e) {
     const values = getValues()
     addNewTodo(values) //go to todo.js and create a todo obj
 
-    
+    if (activeProject === values.projectValue){
+        // need to call the project making 
+    }    
     resetForm()
 }
 
@@ -152,17 +190,19 @@ function globalEventListner(type,selector,callback){ //type=click , selector is 
 }
 
 function projectEventHandler(e){
-    if (e.target.dataset.filter === "home"){
-        createHome()
-    }
+    activeProject = e.target.dataset.filter 
+    renderTodos(e.target.dataset.filter)
+    // if (e.target.dataset.filter === "home"){   
+        
+    // }
 
-    if (e.target.dataset.filter === "today"){
-        clearCards()
-    }
+    // if (e.target.dataset.filter === "today"){
+    //     clearCards()
+    // }
 }
 
 export function test() {
     setupButtons()
     // createTodoCard()
-    createHome()
+    renderTodos("home")
 }

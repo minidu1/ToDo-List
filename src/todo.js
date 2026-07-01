@@ -9,7 +9,6 @@ class Todo {
     }
 }
 
-// export const todoList = []
 //create the todo
 function createTodo(title,description,dueDate,priority,project) {
     const todoItem = new Todo({ //call todo class
