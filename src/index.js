@@ -5,6 +5,6 @@ import { test as testProject } from "./project.js";
 import { test as testUi } from "./ui.js";
 
 // testTodo()
-// testProject()
+testProject()
 // setupButtons()
 testUi()

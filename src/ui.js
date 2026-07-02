@@ -1,6 +1,7 @@
 import addNewTodo from "./todo.js"
 import { getAllTodos } from "./project.js"
-import {isToday, isThisWeek} from "date-fns"
+import { isToday, isThisWeek } from "date-fns"
+import { vi } from "date-fns/locale"
 
 let activeProject = "home"
 
@@ -13,11 +14,8 @@ export function setupButtons() {
     addTodoBtn.addEventListener("click", showAddTodoForm)
     cancelBtn.addEventListener("click", cancelForm)
     form.addEventListener("submit", handleSubmit)
-    // homeBtn.addEventListener("click", createHome)
-    // navButtons.forEach(navButton => {
-    //     navButton.addEventListener("click", e => console.log(e))
-    // })
-    globalEventListner("click", ".nav-btn", projectEventHandler)
+    globalEventListner("click", ".nav-btn", navBtnEventHandler)
+    globalEventListner("click", ".project-item", projectEventHandler)
 }
 //show form when click the add todo button
 function showAddTodoForm() {
@@ -89,8 +87,8 @@ function clearCards() {
 }
 
 function createTodoCard(todo) {
-    console.log(todo)
-    const {title, description, dueDate, priority, project} = todo
+    // console.log(todo)
+    const { title, description, dueDate, priority, project } = todo
     const mainListSec = document.querySelector(".main-list")
     const todoDiv = document.createElement("div")
     const checkAreaLabel = document.createElement("label")
@@ -113,11 +111,11 @@ function createTodoCard(todo) {
     deleteIcon.classList.add("fa-regular", "fa-trash-can")
 
     titleSpan.textContent = title
-    if (dueDate == ""){
+    if (dueDate == "") {
         dateSpan.textContent = "Unknown"
     }
-    else{dateSpan.textContent = dueDate}
-    
+    else { dateSpan.textContent = dueDate }
+
 
     checkAreaLabel.append(checkbox, titleSpan)
     editBtn.appendChild(editIcon)
@@ -131,38 +129,41 @@ function createHome(todos) {
 
 }
 
-function createToday(todos){
+function createToday(todos) {
     const filteredTodos = todos.filter(todo => filterToday(todo))
     filteredTodos.forEach(createTodoCard)
 }
 
-function createWeek(todos){
+function createWeek(todos) {
     const filteredTodos = todos.filter(todo => filterWeek(todo))
     filteredTodos.forEach(createTodoCard)
 }
 
-function filterToday(todo){
+function filterToday(todo) {
     const todoDate = new Date(todo.dueDate)
     return isToday(todoDate)
 }
 
-function filterWeek(todo){
+function filterWeek(todo) {
     const todoDate = new Date(todo.dueDate)
     return isThisWeek(todoDate)
 }
 
-function renderTodos(filter){
+function renderTodos(filter) {
     clearCards()
     const todos = getAllTodos()
-    if(filter === "home"){
-        createHome(todos)
+
+    //filter the wanted todos
+    const views = {
+        home: createHome,
+        today: createToday,
+        week: createWeek
+    }
+    if (views[filter]) {
+        views[filter](todos)
+    }
+    else {
         
-    }
-    if(filter === "today"){
-        createToday(todos)
-    }
-    if(filter === "week"){
-        createWeek(todos)
     }
 }
 
@@ -173,32 +174,30 @@ function handleSubmit(e) {
     const values = getValues()
     addNewTodo(values) //go to todo.js and create a todo obj
 
-    if (activeProject === values.projectValue){
+    if (activeProject === values.projectValue) {
         // need to call the project making 
-    }    
+    }
     resetForm()
 }
 
 //add global event listner on document so new buttons also get the listner and can use for any button
-function globalEventListner(type,selector,callback){ //type=click , selector is the button we need, callback function.(eventlistners blog webdevsimplified)
+function globalEventListner(type, selector, callback) { //type=click , selector is the button we need, callback function.(eventlistners blog webdevsimplified)
     document.addEventListener(
         type,
-        e =>{
+        e => {
             if (e.target.matches(selector)) callback(e) //methana {} danna one na ekama peliya nisa
         }
     )
 }
 
-function projectEventHandler(e){
-    activeProject = e.target.dataset.filter 
-    renderTodos(e.target.dataset.filter)
-    // if (e.target.dataset.filter === "home"){   
-        
-    // }
+function navBtnEventHandler(e) {
+    activeProject = e.target.dataset.filter
+    renderTodos(activeProject)
+}
 
-    // if (e.target.dataset.filter === "today"){
-    //     clearCards()
-    // }
+function projectEventHandler(e) {
+    activeProject = e.target.dataset.id
+    renderTodos(activeProject)
 }
 
 export function test() {
