@@ -1,5 +1,5 @@
 import addNewTodo from "./todo.js"
-import { getAllTodos } from "./project.js"
+import { getAllTodos, getAllProjects } from "./project.js"
 import { isToday, isThisWeek } from "date-fns"
 import { vi } from "date-fns/locale"
 
@@ -33,9 +33,18 @@ function resetForm() {
     form.reset()
 }
 
+function createNavBtn(projectName, projectId){
+    const projectListDiv = document.querySelector(".project-list") 
+    const projectBtn = document.createElement("button")
+
+    projectBtn.classList.add("btn", "project-item")
+    projectBtn.dataset.projectId = projectId
+    projectBtn.textContent = projectName
+
+    projectListDiv.appendChild(projectBtn)
+}
+
 function getValues(e) {
-
-
     const titleValue = document.querySelector("#todo-title").value.trim()
     const descValue = document.querySelector("#todo-desc").value.trim()
     const dateValue = document.querySelector("#todo-due").value
@@ -159,11 +168,12 @@ function renderTodos(filter) {
         today: createToday,
         week: createWeek
     }
-    if (views[filter]) {
-        views[filter](todos)
+    if (views[filter]) { //select the filter function from views
+        views[filter](todos) //run the function with param
     }
+    //if user select a project
     else {
-        
+        filterProject(filter)
     }
 }
 
@@ -190,13 +200,22 @@ function globalEventListner(type, selector, callback) { //type=click , selector 
     )
 }
 
+function renderNavBar(){
+    const projects = getAllProjects()
+    // console.log(projects)
+    projects.forEach(project =>{
+        // console.log(project)
+        createNavBtn(project.name, project.id)
+    })
+}
+
 function navBtnEventHandler(e) {
     activeProject = e.target.dataset.filter
     renderTodos(activeProject)
 }
 
 function projectEventHandler(e) {
-    activeProject = e.target.dataset.id
+    activeProject = e.target.dataset.projectId
     renderTodos(activeProject)
 }
 
@@ -204,4 +223,6 @@ export function test() {
     setupButtons()
     // createTodoCard()
     renderTodos("home")
+    // createNavbar()
+    renderNavBar()
 }
