@@ -148,6 +148,11 @@ function createWeek(todos) {
     filteredTodos.forEach(createTodoCard)
 }
 
+function createProject(filter){
+    const filteredProject = filterProject(filter)
+    filteredProject.data.forEach(createTodoCard)
+}
+
 function filterToday(todo) {
     const todoDate = new Date(todo.dueDate)
     return isToday(todoDate)
@@ -158,9 +163,16 @@ function filterWeek(todo) {
     return isThisWeek(todoDate)
 }
 
+function filterProject(filter){
+    const projects = getAllProjects()
+
+    return projects.find(project => project.id === filter) || "none";
+}
+
 function renderTodos(filter) {
     clearCards()
     const todos = getAllTodos()
+    const projects = getAllProjects()
 
     //filter the wanted todos
     const views = {
@@ -173,7 +185,7 @@ function renderTodos(filter) {
     }
     //if user select a project
     else {
-        filterProject(filter)
+        createProject(filter)
     }
 }
 
