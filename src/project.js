@@ -30,7 +30,6 @@ function ensureProjectExist(todo) {
 export function addToProjectList(todo) {
     ensureProjectExist(todo)
     projectList[todo.project].data.push(todo) // add new todo to projectlist(inside the project user gave [todo.project])
-    // projectList[todo.project].id = crypto.randomUUID()
     localStorage.setItem("projects", JSON.stringify(projectList))
 }
 

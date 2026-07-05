@@ -16,6 +16,7 @@ export function setupButtons() {
     form.addEventListener("submit", handleSubmit)
     globalEventListner("click", ".nav-btn", navBtnEventHandler)
     globalEventListner("click", ".project-item", projectEventHandler)
+    globalEventListner("click", "input[type='checkbox']", toggleCompleted)
 }
 //show form when click the add todo button
 function showAddTodoForm() {
@@ -33,8 +34,8 @@ function resetForm() {
     form.reset()
 }
 
-function createNavBtn(projectName, projectId){
-    const projectListDiv = document.querySelector(".project-list") 
+function createNavBtn(projectName, projectId) {
+    const projectListDiv = document.querySelector(".project-list")
     const projectBtn = document.createElement("button")
 
     projectBtn.classList.add("btn", "project-item")
@@ -97,7 +98,7 @@ function clearCards() {
 
 function createTodoCard(todo) {
     // console.log(todo)
-    const { title, description, dueDate, priority, project } = todo
+    const { title, description, dueDate, priority, project, id } = todo
     const mainListSec = document.querySelector(".main-list")
     const todoDiv = document.createElement("div")
     const checkAreaLabel = document.createElement("label")
@@ -110,8 +111,10 @@ function createTodoCard(todo) {
     const deleteIcon = document.createElement("i")
 
     todoDiv.classList.add("todo")
+    todoDiv.dataset.todoId = id
     checkAreaLabel.classList.add("check-area")
     checkbox.type = "checkbox"
+    // checkbox.dataset.todoId = id
     titleSpan.classList.add("title")
     dateSpan.classList.add("date")
     deleteBtn.classList.add("action-btn", "delete")
@@ -148,7 +151,7 @@ function createWeek(todos) {
     filteredTodos.forEach(createTodoCard)
 }
 
-function createProject(filter){
+function createProject(filter) {
     const filteredProject = filterProject(filter)
     filteredProject.data.forEach(createTodoCard)
 }
@@ -163,7 +166,7 @@ function filterWeek(todo) {
     return isThisWeek(todoDate)
 }
 
-function filterProject(filter){
+function filterProject(filter) {
     const projects = getAllProjects()
 
     return projects.find(project => project.id === filter) || "none";
@@ -202,6 +205,30 @@ function handleSubmit(e) {
     resetForm()
 }
 
+function renderNavBar() {
+    const projects = getAllProjects()
+    // console.log(projects)
+    projects.forEach(project => {
+        // console.log(project)
+        createNavBtn(project.name, project.id)
+    })
+}
+
+function toggleCompleted(e) {
+    const todoCard = e.target.closest(".todo")
+    const todoId = todoCard?.dataset.todoId
+
+    if (!todoId) return
+
+    const todos = getAllTodos()
+    const todo = todos.find(todo => todo.id === todoId);
+
+    if (todo) {
+        todo.completed = e.target.checked
+        console.log(todo.completed)
+    }
+}
+
 //add global event listner on document so new buttons also get the listner and can use for any button
 function globalEventListner(type, selector, callback) { //type=click , selector is the button we need, callback function.(eventlistners blog webdevsimplified)
     document.addEventListener(
@@ -210,15 +237,6 @@ function globalEventListner(type, selector, callback) { //type=click , selector 
             if (e.target.matches(selector)) callback(e) //methana {} danna one na ekama peliya nisa
         }
     )
-}
-
-function renderNavBar(){
-    const projects = getAllProjects()
-    // console.log(projects)
-    projects.forEach(project =>{
-        // console.log(project)
-        createNavBtn(project.name, project.id)
-    })
 }
 
 function navBtnEventHandler(e) {
@@ -230,6 +248,7 @@ function projectEventHandler(e) {
     activeProject = e.target.dataset.projectId
     renderTodos(activeProject)
 }
+
 
 export function test() {
     setupButtons()
