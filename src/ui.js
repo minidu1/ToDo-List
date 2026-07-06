@@ -1,5 +1,5 @@
 import addNewTodo from "./todo.js"
-import { getAllTodos, getAllProjects } from "./project.js"
+import { getAllTodos, getAllProjects, saveProjects } from "./project.js"
 import { isToday, isThisWeek } from "date-fns"
 import { vi } from "date-fns/locale"
 
@@ -98,7 +98,7 @@ function clearCards() {
 
 function createTodoCard(todo) {
     // console.log(todo)
-    const { title, description, dueDate, priority, project, id } = todo
+    const { title, description, dueDate, priority, project, id, completed } = todo
     const mainListSec = document.querySelector(".main-list")
     const todoDiv = document.createElement("div")
     const checkAreaLabel = document.createElement("label")
@@ -127,6 +127,9 @@ function createTodoCard(todo) {
         dateSpan.textContent = "Unknown"
     }
     else { dateSpan.textContent = dueDate }
+
+    //check the checkbox if todo object completed property is true
+    checkbox.checked =  completed // true or false
 
 
     checkAreaLabel.append(checkbox, titleSpan)
@@ -225,7 +228,7 @@ function toggleCompleted(e) {
 
     if (todo) {
         todo.completed = e.target.checked
-        console.log(todo.completed)
+        saveProjects()
     }
 }
 

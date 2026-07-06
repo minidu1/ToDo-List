@@ -1,5 +1,9 @@
 const projectList = JSON.parse(localStorage.getItem("projects")) || {}
 
+export function saveProjects(){
+    localStorage.setItem("projects", JSON.stringify(projectList))
+}
+
 function createNewProject(name) {
     projectList[name] = {
         data: [],
@@ -30,7 +34,7 @@ function ensureProjectExist(todo) {
 export function addToProjectList(todo) {
     ensureProjectExist(todo)
     projectList[todo.project].data.push(todo) // add new todo to projectlist(inside the project user gave [todo.project])
-    localStorage.setItem("projects", JSON.stringify(projectList))
+    saveProjects()
 }
 
 export function getAllProjects() {
