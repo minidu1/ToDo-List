@@ -196,6 +196,13 @@ function renderTodos(filter) {
     }
 }
 
+function shouldRender(todo){
+    if (activeProject === todo.projectId) return true
+    if (activeProject === "home") return true
+    if (activeProject === "week") return isThisWeek(newTodo.dueDate)
+    if (activeProject === "today") return isToday(newTodo.dueDate)
+}
+
 function handleSubmit(e) {
     const isValid = validateForm(e)
     if (!isValid) return //stop function running if form isn't validated
@@ -203,12 +210,7 @@ function handleSubmit(e) {
     const values = getValues()
     const newTodo = addNewTodo(values) //go to todo.js and create a todo obj
 
-    if (activeProject === newTodo.projectId || activeProject === "home") {
-        renderTodos(activeProject)
-    }
-    else if(activeProject === "today" && isToday(newTodo.dueDate) || activeProject === "week" && isThisWeek(newTodo.dueDate)){
-        renderTodos(activeProject)
-    }
+    if (shouldRender(newTodo)) { renderTodos(activeProject) } // check if new todo is going to current opend project and if true, render it aouto
     resetForm()
 }
 
