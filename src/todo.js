@@ -26,7 +26,9 @@ function createTodo(title,description,dueDate,priority,project) {
 //get user entered data from ui form
 export default function addNewTodo({titleValue, descValue, dateValue, priorityvalue, projectValue}){
     const newTodo = createTodo(titleValue, descValue, dateValue, priorityvalue, projectValue)
-    addToProjectList(newTodo) //add todo obj to a project in project.js
+    const projectId = addToProjectList(newTodo) //catch the project id returning in addToProjectList
+    newTodo.projectId = projectId
+    return (newTodo)
 }
 
 export function test() {

@@ -49,6 +49,7 @@ function getValues(e) {
     const titleValue = document.querySelector("#todo-title").value.trim()
     const descValue = document.querySelector("#todo-desc").value.trim()
     const dateValue = document.querySelector("#todo-due").value
+    // const date = new Date(dateValue)
     const priorityvalue = document.querySelector("#todo-priority").value
     const projectValue = document.querySelector("#todo-project").value.trim() || "common" //use project as common if empty string
     // call addNewTodo in todo.js
@@ -197,13 +198,16 @@ function renderTodos(filter) {
 
 function handleSubmit(e) {
     const isValid = validateForm(e)
-    if (!isValid) return //stop function running if form isnt validated
+    if (!isValid) return //stop function running if form isn't validated
 
     const values = getValues()
-    addNewTodo(values) //go to todo.js and create a todo obj
+    const newTodo = addNewTodo(values) //go to todo.js and create a todo obj
 
-    if (activeProject === values.projectValue) {
-        // need to call the project making 
+    if (activeProject === newTodo.projectId || activeProject === "home") {
+        renderTodos(activeProject)
+    }
+    else if(activeProject === "today" && isToday(newTodo.dueDate) || activeProject === "week" && isThisWeek(newTodo.dueDate)){
+        renderTodos(activeProject)
     }
     resetForm()
 }
@@ -242,11 +246,12 @@ function globalEventListner(type, selector, callback) { //type=click , selector 
     )
 }
 
+// Create Home,Today, This week by using dat-* in html
 function navBtnEventHandler(e) {
     activeProject = e.target.dataset.filter
     renderTodos(activeProject)
 }
-
+//create project todos by using project id
 function projectEventHandler(e) {
     activeProject = e.target.dataset.projectId
     renderTodos(activeProject)
@@ -260,3 +265,4 @@ export function test() {
     // createNavbar()
     renderNavBar()
 }
+// new project ekak haduwaama new project eka auto refresh une na

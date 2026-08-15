@@ -1,3 +1,5 @@
+import { id } from "date-fns/locale"
+
 const projectList = JSON.parse(localStorage.getItem("projects")) || {}
 
 export function saveProjects(){
@@ -10,18 +12,13 @@ function createNewProject(name) {
         id: crypto.randomUUID(),
         name: name
     }
-    // projectList[name].data = [] //make empty arrays to add projects
-    // projectList.id = crypto.randomUUID()
-    // projectList.name = name
-
-
     // console.log("project created")
 }
 
 //check todo's project already in projectList, if not add it to project list
 function ensureProjectExist(todo) {
     if (todo.project in projectList) { //check is project of todo already in the list
-        return
+        // return 
     }
     else {
         // console.log("project is not in list")
@@ -35,6 +32,7 @@ export function addToProjectList(todo) {
     ensureProjectExist(todo)
     projectList[todo.project].data.push(todo) // add new todo to projectlist(inside the project user gave [todo.project])
     saveProjects()
+    return projectList[todo.project].id
 }
 
 export function getAllProjects() {
