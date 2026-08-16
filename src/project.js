@@ -12,19 +12,14 @@ function createNewProject(name) {
         id: crypto.randomUUID(),
         name: name
     }
-    // console.log("project created")
 }
 
 //check todo's project already in projectList, if not add it to project list
 function ensureProjectExist(todo) {
     if (todo.project in projectList) { //check is project of todo already in the list
-        // return 
     }
     else {
-        // console.log("project is not in list")
         createNewProject(todo.project)
-
-        // console.log("new project list", projectList)
     }
 }
 
@@ -40,22 +35,32 @@ export function getAllProjects() {
     for (const project in projectList) {
         projects.push(projectList[project])
     }
-    // console.log("projects are ", projects)
     return projects
 }
 
 export function getAllTodos() {
-    const projects = getAllProjects() //give all project name issnide an array
+    const projects = getAllProjects() //give all project name isnside an array
     const todos = []
     for (const project of projects) {
-        // console.log("list", project)
         for (const todo of project.data) {
-            // console.log("todo", projectList[project].data)
             todos.push(todo)
         }
     }
-    // console.log("todo", todos)
     return todos
+}
+
+export function deleteTodo(todoId){
+
+    for (const project of getAllProjects()){ //get the project obj from getAllProjects()
+       const index =  project.data.findIndex( todo => todo.id === todoId) //find the index of deleting todoid on every project(-1 if index not found)
+
+       if (index !== -1){ 
+         project.data.splice(index, 1) //Remove the todo from the project, Because projects are objects, this project in getAllProjects() aarray is a reference to real project
+         saveProjects() //Save the Projects. bcs of reference deleting a project from this array will also delete the project from main array
+         return true
+       }
+    }
+    return false
 }
 
 export function test() {
