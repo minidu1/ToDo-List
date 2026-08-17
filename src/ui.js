@@ -1,10 +1,11 @@
-import addNewTodo, {deleteTodo, findTodo, getAllTodos} from "./todo.js"
+import addNewTodo, {deleteTodo, editTodo, findTodo, getAllTodos} from "./todo.js"
 import { getAllProjects, saveProjects,  } from "./project.js"
 import { isToday, isThisWeek } from "date-fns"
 import { vi } from "date-fns/locale"
 
 let activeProject = "home"
 let formMode = "create"
+let activeTodo = null
 
 export function setupButtons() {
     const addTodoBtn = document.querySelector(".add-new-todo")
@@ -218,10 +219,12 @@ function handleSubmit(e) {
     if (formMode === "create") {
         const newTodo = addNewTodo(values) //go to todo.js and create a todo obj
         if (shouldRender(newTodo)) { renderTodos(activeProject) } // check if new todo is going to current opend project and if true, render it aouto
-
+        renderNavBar()
     }
     else if(formMode === "edit"){
-        alert("edit")
+        const editedTodo = editTodo(activeTodo,values)
+        renderTodos(activeProject)
+        renderNavBar()
     }
     else{
         alert("Create button error")
@@ -230,7 +233,13 @@ function handleSubmit(e) {
     resetForm()
 }
 
+function clearNavBar(){
+   const projectListDiv = document.querySelector(".project-list")
+   projectListDiv.textContent = ""
+}
+
 function renderNavBar() {
+    clearNavBar()
     const projects = getAllProjects()
     projects.forEach(project => {
         createNavBtn(project.name, project.id)
@@ -275,15 +284,11 @@ function populateTodoForm(e) {
     createBtn.textContent = "edit"
 }
 
-function editTodo(e) {
-    const values = getValues()
-    console.log(values)
-}
-
 function handleEdit(e) {
     showAddTodoForm()
     populateTodoForm(e)
     formMode = "edit"
+    activeTodo = getTodoId(e)
 }
 
 //add global event listner on document so new buttons also get the listner and can use for any button
