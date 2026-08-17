@@ -1,5 +1,5 @@
-import addNewTodo from "./todo.js"
-import { getAllTodos, getAllProjects, saveProjects, deleteTodo, findTodo } from "./project.js"
+import addNewTodo, {deleteTodo, findTodo, getAllTodos} from "./todo.js"
+import { getAllProjects, saveProjects,  } from "./project.js"
 import { isToday, isThisWeek } from "date-fns"
 import { vi } from "date-fns/locale"
 

@@ -1,4 +1,4 @@
-import { addToProjectList } from "./project.js";
+import { addToProjectList, getAllProjects, saveProjects } from "./project.js";
 class Todo {
     constructor({ title, description, dueDate, priority = "low", project = "common" }) {
         this.title = title;
@@ -29,6 +29,41 @@ export default function addNewTodo({titleValue, descValue, dateValue, priorityva
     const projectId = addToProjectList(newTodo) //catch the project id returning in addToProjectList
     newTodo.projectId = projectId
     return (newTodo)
+}
+
+export function deleteTodo(todoId){
+
+    for (const project of getAllProjects()){ //get the project obj from getAllProjects()
+       const index =  project.data.findIndex( todo => todo.id === todoId) //find the index of deleting todoid on every project(-1 if index not found)
+
+       if (index !== -1){ 
+         project.data.splice(index, 1) //Remove the todo from the project, Because projects are objects, this project in getAllProjects() aarray is a reference to real project
+         saveProjects() //Save the Projects. bcs of reference deleting a project from this array will also delete the project from main array
+         return true
+       }
+    }
+    return false
+}
+
+export function findTodo(todoId){
+    const todos = getAllTodos()
+    for(const todo of todos){
+        if (todo.id === todoId){
+            return todo
+        }
+    }
+    return -1
+}
+
+export function getAllTodos() {
+    const projects = getAllProjects() //give all project name isnside an array
+    const todos = []
+    for (const project of projects) {
+        for (const todo of project.data) {
+            todos.push(todo)
+        }
+    }
+    return todos
 }
 
 export function test() {
