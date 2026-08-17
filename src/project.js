@@ -63,6 +63,16 @@ export function deleteTodo(todoId){
     return false
 }
 
+export function findTodo(todoId){
+    const todos = getAllTodos()
+    for(const todo of todos){
+        if (todo.id === todoId){
+            return todo
+        }
+    }
+    return -1
+}
+
 export function test() {
     // console.log("final project list  ",projectList)
     // getAllProjects()

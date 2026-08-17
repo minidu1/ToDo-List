@@ -1,9 +1,10 @@
 import addNewTodo from "./todo.js"
-import { getAllTodos, getAllProjects, saveProjects, deleteTodo } from "./project.js"
+import { getAllTodos, getAllProjects, saveProjects, deleteTodo, findTodo } from "./project.js"
 import { isToday, isThisWeek } from "date-fns"
 import { vi } from "date-fns/locale"
 
 let activeProject = "home"
+let formMode = "create"
 
 export function setupButtons() {
     const addTodoBtn = document.querySelector(".add-new-todo")
@@ -13,16 +14,21 @@ export function setupButtons() {
 
     addTodoBtn.addEventListener("click", showAddTodoForm)
     cancelBtn.addEventListener("click", cancelForm)
-    form.addEventListener("submit", handleSubmit)
+    form.addEventListener("submit", handleSubmit) //pass "create" param
     globalEventListner("click", ".nav-btn", navBtnEventHandler)
     globalEventListner("click", ".project-item", projectEventHandler)
     globalEventListner("click", "input[type='checkbox']", toggleCompleted)
     globalEventListner("click", ".delete", handleDelete)
+    globalEventListner("click", ".edit", handleEdit)
 }
 //show form when click the add todo button
 function showAddTodoForm() {
     const modal = document.querySelector("#todoModal")
     modal.classList.remove("hidden")
+
+    formMode = "create"
+    const createBtn = document.querySelector(".create")
+    createBtn.textContent = "Create"
 }
 //hide form when click cancel or create
 function hideForm() {
@@ -130,7 +136,7 @@ function createTodoCard(todo) {
     else { dateSpan.textContent = dueDate }
 
     //check the checkbox if todo object completed property is true
-    checkbox.checked =  completed // true or false
+    checkbox.checked = completed // true or false
 
 
     checkAreaLabel.append(checkbox, titleSpan)
@@ -196,7 +202,7 @@ function renderTodos(filter) {
     }
 }
 
-function shouldRender(todo){
+function shouldRender(todo) {
     if (activeProject === todo.projectId) return true
     if (activeProject === "home") return true
     if (activeProject === "week") return isThisWeek(todo.dueDate)
@@ -208,9 +214,19 @@ function handleSubmit(e) {
     if (!isValid) return //stop function running if form isn't validated
 
     const values = getValues()
-    const newTodo = addNewTodo(values) //go to todo.js and create a todo obj
 
-    if (shouldRender(newTodo)) { renderTodos(activeProject) } // check if new todo is going to current opend project and if true, render it aouto
+    if (formMode === "create") {
+        const newTodo = addNewTodo(values) //go to todo.js and create a todo obj
+        if (shouldRender(newTodo)) { renderTodos(activeProject) } // check if new todo is going to current opend project and if true, render it aouto
+
+    }
+    else if(formMode === "edit"){
+        alert("edit")
+    }
+    else{
+        alert("Create button error")
+    }
+
     resetForm()
 }
 
@@ -221,7 +237,7 @@ function renderNavBar() {
     })
 }
 
-function getTodoId(e){
+function getTodoId(e) {
     const todoCard = e.target.closest(".todo")
     const todoId = todoCard?.dataset.todoId
     return todoId
@@ -239,10 +255,35 @@ function toggleCompleted(e) {
     }
 }
 
-function handleDelete(e){
-   const todoId = getTodoId(e)
+function handleDelete(e) {
+    const todoId = getTodoId(e)
     deleteTodo(todoId)
     renderTodos(activeProject)
+}
+
+function populateTodoForm(e) {
+    const todoId = getTodoId(e)
+    const todo = findTodo(todoId)
+
+    const title = document.querySelector("#todo-title").value = todo.title
+    document.querySelector("#todo-desc").value = todo.description
+    document.querySelector("#todo-due").value = todo.dueDate
+    document.querySelector("#todo-priority").value = todo.priority
+    document.querySelector("#todo-project").value = todo.project
+
+    const createBtn = document.querySelector(".create")
+    createBtn.textContent = "edit"
+}
+
+function editTodo(e) {
+    const values = getValues()
+    console.log(values)
+}
+
+function handleEdit(e) {
+    showAddTodoForm()
+    populateTodoForm(e)
+    formMode = "edit"
 }
 
 //add global event listner on document so new buttons also get the listner and can use for any button
