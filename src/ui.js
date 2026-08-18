@@ -380,4 +380,3 @@ export default function renderUi() {
     renderTodos("home")
     renderNavBar()
 }
-// new project ekak haduwaama new project eka auto refresh une na
