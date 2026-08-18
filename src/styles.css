@@ -187,6 +187,37 @@ button:active {
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* container for project button + delete button */
+.project-item-wrap{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ensure project button doesn't expand full-width when inside the wrapper */
+.project-list .project-item{
+  width: auto;
+  flex: 1 1 auto;
+  margin: 0;
+}
+
+/* delete button for projects (UI only) */
+.project-delete{
+  flex: 0;
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-delete:hover{
+  background: rgba(255,255,255,0.06);
+}
+
 .content {
   background-color: var(--background-color);
   overflow-y: auto;

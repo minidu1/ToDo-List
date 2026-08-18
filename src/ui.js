@@ -44,13 +44,28 @@ function resetForm() {
 
 function createNavBtn(projectName, projectId) {
     const projectListDiv = document.querySelector(".project-list")
-    const projectBtn = document.createElement("button")
 
+    // container so we can have a project button and a separate delete button
+    const container = document.createElement("div")
+    container.classList.add("project-item-wrap")
+
+    const projectBtn = document.createElement("button")
     projectBtn.classList.add("btn", "project-item")
     projectBtn.dataset.projectId = projectId
     projectBtn.textContent = projectName
 
-    projectListDiv.appendChild(projectBtn)
+    // delete UI button for projects (no delete logic here)
+    const deleteBtn = document.createElement("button")
+    deleteBtn.classList.add("project-delete")
+    deleteBtn.dataset.projectId = projectId
+    deleteBtn.setAttribute("aria-label", `Delete project ${projectName}`)
+    // optional icon (uses same icon classes as elsewhere in the app)
+    const deleteIcon = document.createElement("i")
+    deleteIcon.classList.add("fa-regular", "fa-trash-can")
+    deleteBtn.appendChild(deleteIcon)
+
+    container.append(projectBtn, deleteBtn)
+    projectListDiv.appendChild(container)
 }
 
 function getValues(e) {
