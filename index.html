@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDO List</title>
+<script defer src="main.js"></script></head>
+
+<body>
+    <header>
+        <img class="logo" src="2c192296e30a3e43034e.png" alt="Logo">
+        <div class="name">Todo List</div>
+        <button class="add-new-todo btn"><i class="fa-solid fa-circle-plus"></i> Add ToDo</button>
+    </header>
+
+    <div class="layout">
+        <aside class="side-bar" role="navigation" aria-label="Main navigation">
+            <div class="side-header">
+                <img class="logo-sm" src="2c192296e30a3e43034e.png" alt="App logo">
+                <div class="side-title">ToDo List</div>
+            </div>
+
+            <nav class="nav-buttons" aria-label="Primary actions">
+                <button class="btn nav-btn home" data-filter="home">Home</button>
+                <button class="btn nav-btn today" data-filter="today">Today</button>
+                <button class="btn nav-btn week" data-filter="week">This week</button>
+            </nav>
+
+            <div class="projects" aria-labelledby="projects-heading">
+                <div id="projects-heading" class="project-heading">Projects</div>
+                <div class="project-list" role="list">
+                    //project buttons goes here
+                </div>
+            </div>
+        </aside>
+        <main class="content">
+            <section class="main-list">
+                //todos goes here
+            </section>
+
+            <!-- Modal popup for creating a new ToDo. Toggle visibility with JS by adding/removing the 'hidden' class. -->
+            <div class="modal-overlay hidden" id="todoModal">
+                <div class="todo-modal" role="dialog" aria-modal="true" aria-labelledby="todoModalTitle">
+                    <h2 id="todoModalTitle">Create ToDo</h2>
+
+                    <form class="todo-form" action="#">
+                        <div class="input-control">
+                            <label for="todo-title">Title*</label>
+                            <input id="todo-title" name="title" type="text" />
+                            <div class="error"></div>
+                        </div>
+
+                        <label for="todo-desc">Description</label>
+                        <textarea id="todo-desc" name="description" rows="4"></textarea>
+
+                        <label for="todo-due">Due date</label>
+                        <input id="todo-due" name="dueDate" type="date" />
+
+                        <label for="todo-priority">Priority</label>
+                        <select id="todo-priority" name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+
+                        <label for="todo-project">Project</label>
+                        <input id="todo-project" name="project" list="project-list" type="text" placeholder="common" />
+
+                        <datalist id="project-list">
+                            //datalist goes here
+                        </datalist>
+
+                        <div class="modal-actions">
+                            <button type="button" class="btn cancel">Cancel</button>
+                            <button type="submit" class="btn create">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://github.com/minidu1" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/minidum" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+        </div>
+
+        <p class="footer-copyright">
+            © 2026 Mansara. All rights reserved.
+        </p>
+    </footer>
+
+
+</body>
+
+</html>
