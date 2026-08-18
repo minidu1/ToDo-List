@@ -290,6 +290,17 @@ footer {
   background-color: #d8e8d8;
   box-shadow: 0 1px 3px rgba(0,0,0,0.48);
 }
+.high-priority {
+    background-color: #e8b4b4;;
+}
+
+.medium-priority {
+    background-color: #eadf9a;
+}
+
+.low-priority {
+    background-color: #d8e8d8;
+}
 input[type="checkbox"] {
   /* Add if not using autoprefixer */
   -webkit-appearance: none;

@@ -119,7 +119,7 @@ function createTodoCard(todo) {
     const editIcon = document.createElement("i")
     const deleteIcon = document.createElement("i")
 
-    todoDiv.classList.add("todo")
+    todoDiv.classList.add("todo", `${todo.priority}-priority`)
     todoDiv.dataset.todoId = id
     checkAreaLabel.classList.add("check-area")
     checkbox.type = "checkbox"
@@ -310,6 +310,10 @@ function navBtnEventHandler(e) {
 function projectEventHandler(e) {
     activeProject = e.target.dataset.projectId
     renderTodos(activeProject)
+}
+
+function colorTodoPriority(){
+
 }
 
 
