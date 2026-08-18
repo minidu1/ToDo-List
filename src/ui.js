@@ -17,7 +17,7 @@ export function setupButtons() {
     cancelBtn.addEventListener("click", cancelForm)
     form.addEventListener("submit", handleSubmit) //pass "create" param
     globalEventListner("click", ".nav-btn", navBtnEventHandler)
-    globalEventListner("click", ".project-item", projectEventHandler)
+    globalEventListner("click", ".project-name-btn", projectEventHandler)
     globalEventListner("click", "input[type='checkbox']", toggleCompleted)
     globalEventListner("click", ".delete", handleTodoDelete)
     globalEventListner("click", ".edit", handleEdit)
@@ -222,6 +222,7 @@ function renderTodos(filter) {
 
 function shouldRender(todo) {
     if (activeProject === todo.projectId) return true
+    if (activeProject === todo) return true //When deleting project, "todo" is todoId not todo obj
     if (activeProject === "home") return true
     if (activeProject === "week") return isThisWeek(todo.dueDate)
     if (activeProject === "today") return isToday(todo.dueDate)
@@ -299,10 +300,10 @@ function handleProjectDelete(e) {
 
     if (confirmed) {
         deleteProject(projectId);
+        renderNavBar()
 
         if(shouldRender(projectId)) {
             activeProject = "home"
-            renderNavBar()
             renderTodos(activeProject)
         }
         return
