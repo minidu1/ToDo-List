@@ -7,7 +7,7 @@ let activeProject = "home"
 let formMode = "create"
 let activeTodo = null
 
-export function setupButtons() {
+function setupButtons() {
     const addTodoBtn = document.querySelector(".add-new-todo")
     const cancelBtn = document.querySelector(".cancel")
     const form = document.querySelector(".todo-form")
@@ -375,7 +375,7 @@ function projectEventHandler(e) {
 
 
 
-export function test() {
+export default function renderUi() {
     setupButtons()
     renderTodos("home")
     renderNavBar()

@@ -299,13 +299,7 @@ footer {
   justify-content: flex-end;
   margin-top: 6px;
 }
-/* form .btn{
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-} */
+
 .btn.cancel{
   background: transparent;
   border: 1px solid #ccc;
@@ -362,7 +356,6 @@ input[type="checkbox"] {
   height: 1em;
   border: 0.01em solid currentColor;
   border-radius: 0.15em;
-  /* transform: translateY(-0.075em); */
 
   display: grid;
   place-content: center;
@@ -394,14 +387,59 @@ input:checked + .title {
 .todo .date{
   margin-right: 4vw;
 }
-.todo .delete{
-  /* margin-right: 15px; */
-}
+
 .action-btn {
   background: none;
   color: black;
   border: none;
   padding: 0.7em;
-  /* margin-right: 20px; */
   cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    padding: 0.6rem 1rem;
+
+    color: white;
+}
+
+.footer-links {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.footer-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    color: white;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.1);
+
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.footer-links a:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.footer-links i {
+    font-size: 1rem;
+}
+
+.footer-copyright {
+    margin: 0;
+    font-size: 0.75rem;
+    opacity: 0.7;
 }

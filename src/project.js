@@ -44,18 +44,8 @@ export function deleteProject(projectId){
         if (projectId === project.id){
             delete projectList[project.name]
             saveProjects()
-            
             return
         }
     }
     return false
-}
-
-export function test() {
-    // console.log("final project list  ",projectList)
-    // getAllProjects()
-    // getAllTodos()
-
-    // console.log(projectList)
-
 }

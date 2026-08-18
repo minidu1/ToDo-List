@@ -1,10 +1,6 @@
 import "./styles.css";
 import '@fortawesome/fontawesome-free/css/all.css';
-import { test as testTodo} from "./todo.js";
-import { test as testProject } from "./project.js";
-import { test as testUi } from "./ui.js";
+import renderUi from "./ui.js";
 
-// testTodo()
-testProject()
-// setupButtons()
-testUi()
+
+renderUi()
