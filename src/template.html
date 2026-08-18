@@ -30,25 +30,13 @@
             <div class="projects" aria-labelledby="projects-heading">
                 <div id="projects-heading" class="project-heading">Projects</div>
                 <div class="project-list" role="list">
-                    <!-- <button class="btn project-item " data-id="123" role="listitem">1st one</button>
-                    <button class="btn project-item" role="listitem">john</button>
-                    <button class="btn project-item" role="listitem">uni</button> -->
+                    //project buttons goes here 
                 </div>
             </div>
         </aside>
         <main class="content">
             <section class="main-list">
-                <!-- Main app content (todo list) goes here -->
-                <!-- <div class="todo">
-                    <label class="check-area">
-                        <input type="checkbox" id="hi">
-                        <span class="title">Make breakfirst</span>
-                    </label>
-                    <span class="date">date</span>
-                    <button class="action-btn edit "><i class="fa-regular fa-pen-to-square"></i></button>
-                    <button class="action-btn delete"><i class="fa-regular fa-trash-can "></i></button>
-                </div>
-                <div class="todo"><input type="checkbox"> eat breackfirst</div> -->
+                //todos goes here
             </section>
 
             <!-- Modal popup for creating a new ToDo. Toggle visibility with JS by adding/removing the 'hidden' class. -->
@@ -77,7 +65,11 @@
                         </select>
 
                         <label for="todo-project">Project</label>
-                        <input id="todo-project" name="project" type="text" placeholder="Project name (optional)" />
+                        <input id="todo-project" name="project" list="project-list" type="text" placeholder="common" />
+
+                        <datalist id="project-list">
+                            //datalist goes here
+                        </datalist>
 
                         <div class="modal-actions">
                             <button type="button" class="btn cancel">Cancel</button>

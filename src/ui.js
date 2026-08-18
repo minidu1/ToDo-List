@@ -13,7 +13,7 @@ export function setupButtons() {
     const form = document.querySelector(".todo-form")
     const navButtons = document.querySelectorAll(".nav-btn")
 
-    addTodoBtn.addEventListener("click", showAddTodoForm)
+    addTodoBtn.addEventListener("click", handleAddTodoBtn)
     cancelBtn.addEventListener("click", cancelForm)
     form.addEventListener("submit", handleSubmit) //pass "create" param
     globalEventListner("click", ".nav-btn", navBtnEventHandler)
@@ -23,15 +23,33 @@ export function setupButtons() {
     globalEventListner("click", ".edit", handleEdit)
     globalEventListner("click", ".project-delete", handleProjectDelete)
 }
+
+function loadProjectList(){
+    const dataList = document.querySelector("#project-list")
+    dataList.textContent = ""
+    const projects = getAllProjects()
+
+    projects.forEach(project => {
+        const option = document.createElement("option")
+        option.value = project.name
+        dataList.appendChild(option)    
+    })
+}
+
+function handleAddTodoBtn(){
+    formMode = "create"
+    const createBtn = document.querySelector(".create")
+    createBtn.textContent = "Create"
+    showAddTodoForm()
+}
 //show form when click the add todo button
 function showAddTodoForm() {
     const modal = document.querySelector("#todoModal")
     modal.classList.remove("hidden")
 
-    formMode = "create"
-    const createBtn = document.querySelector(".create")
-    createBtn.textContent = "Create"
+    loadProjectList()
 }
+
 //hide form when click cancel or create
 function hideForm() {
     const modal = document.querySelector("#todoModal")
