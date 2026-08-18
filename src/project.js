@@ -38,6 +38,19 @@ export function getAllProjects() {
     return projects
 }
 
+export function deleteProject(projectId){
+    const projects = getAllProjects()
+    for(const project of projects){
+        if (projectId === project.id){
+            delete projectList[project.name]
+            saveProjects()
+            
+            return
+        }
+    }
+    return false
+}
+
 export function test() {
     // console.log("final project list  ",projectList)
     // getAllProjects()

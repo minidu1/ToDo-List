@@ -1,5 +1,5 @@
-import addNewTodo, {deleteTodo, editTodo, findTodo, getAllTodos} from "./todo.js"
-import { getAllProjects, saveProjects,  } from "./project.js"
+import addNewTodo, { deleteTodo, editTodo, findTodo, getAllTodos } from "./todo.js"
+import { getAllProjects, saveProjects, deleteProject } from "./project.js"
 import { isToday, isThisWeek } from "date-fns"
 import { vi } from "date-fns/locale"
 
@@ -238,21 +238,21 @@ function handleSubmit(e) {
         if (shouldRender(newTodo)) { renderTodos(activeProject) } // check if new todo is going to current opend project and if true, render it aouto
         renderNavBar()
     }
-    else if(formMode === "edit"){
-        const editedTodo = editTodo(activeTodo,values)
+    else if (formMode === "edit") {
+        const editedTodo = editTodo(activeTodo, values)
         renderTodos(activeProject)
         renderNavBar()
     }
-    else{
+    else {
         alert("Create button error")
     }
 
     resetForm()
 }
 
-function clearNavBar(){
-   const projectListDiv = document.querySelector(".project-list")
-   projectListDiv.textContent = ""
+function clearNavBar() {
+    const projectListDiv = document.querySelector(".project-list")
+    projectListDiv.textContent = ""
 }
 
 function renderNavBar() {
@@ -269,7 +269,7 @@ function getTodoId(e) {
     return todoId
 }
 
-function getProjectId(e){
+function getProjectId(e) {
     const projectButton = e.target.closest(".project-item")
     const projectId = projectButton?.dataset.projectId
     return projectId
@@ -293,9 +293,21 @@ function handleTodoDelete(e) {
     renderTodos(activeProject)
 }
 
-function handleProjectDelete(e){
+function handleProjectDelete(e) {
     const projectId = getProjectId(e)
-    console.log(projectId)
+    const confirmed = confirm("Are you sure you want to delete this project?");
+
+    if (confirmed) {
+        deleteProject(projectId);
+
+        if(shouldRender(projectId)) {
+            activeProject = "home"
+            renderNavBar()
+            renderTodos(activeProject)
+        }
+        return
+    }
+    return false
 }
 
 function populateTodoForm(e) {
