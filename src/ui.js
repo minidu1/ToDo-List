@@ -19,8 +19,9 @@ export function setupButtons() {
     globalEventListner("click", ".nav-btn", navBtnEventHandler)
     globalEventListner("click", ".project-item", projectEventHandler)
     globalEventListner("click", "input[type='checkbox']", toggleCompleted)
-    globalEventListner("click", ".delete", handleDelete)
+    globalEventListner("click", ".delete", handleTodoDelete)
     globalEventListner("click", ".edit", handleEdit)
+    globalEventListner("click", ".project-delete", handleProjectDelete)
 }
 //show form when click the add todo button
 function showAddTodoForm() {
@@ -45,27 +46,28 @@ function resetForm() {
 function createNavBtn(projectName, projectId) {
     const projectListDiv = document.querySelector(".project-list")
 
-    // container so we can have a project button and a separate delete button
-    const container = document.createElement("div")
-    container.classList.add("project-item-wrap")
+    // outer control is a div (keeps classes so styles remain)
+    const outer = document.createElement("div")
+    outer.classList.add("btn", "project-item", "project-item-wrap")
+    outer.dataset.projectId = projectId
 
-    const projectBtn = document.createElement("button")
-    projectBtn.classList.add("btn", "project-item")
-    projectBtn.dataset.projectId = projectId
-    projectBtn.textContent = projectName
+    // inner button that shows project name and is clickable
+    const nameBtn = document.createElement("button")
+    nameBtn.type = "button"
+    nameBtn.classList.add("project-name-btn")
+    nameBtn.textContent = projectName
 
     // delete UI button for projects (no delete logic here)
     const deleteBtn = document.createElement("button")
+    deleteBtn.type = "button"
     deleteBtn.classList.add("project-delete")
-    deleteBtn.dataset.projectId = projectId
     deleteBtn.setAttribute("aria-label", `Delete project ${projectName}`)
-    // optional icon (uses same icon classes as elsewhere in the app)
     const deleteIcon = document.createElement("i")
     deleteIcon.classList.add("fa-regular", "fa-trash-can")
     deleteBtn.appendChild(deleteIcon)
 
-    container.append(projectBtn, deleteBtn)
-    projectListDiv.appendChild(container)
+    outer.append(nameBtn, deleteBtn)
+    projectListDiv.appendChild(outer)
 }
 
 function getValues(e) {
@@ -266,6 +268,12 @@ function getTodoId(e) {
     const todoId = todoCard?.dataset.todoId
     return todoId
 }
+
+function getProjectId(e){
+    const projectButton = e.target.closest(".project-item")
+    const projectId = projectButton?.dataset.projectId
+    return projectId
+}
 function toggleCompleted(e) {
     const todoId = getTodoId(e)
     if (!todoId) return
@@ -279,10 +287,15 @@ function toggleCompleted(e) {
     }
 }
 
-function handleDelete(e) {
+function handleTodoDelete(e) {
     const todoId = getTodoId(e)
     deleteTodo(todoId)
     renderTodos(activeProject)
+}
+
+function handleProjectDelete(e){
+    const projectId = getProjectId(e)
+    console.log(projectId)
 }
 
 function populateTodoForm(e) {
@@ -323,13 +336,12 @@ function navBtnEventHandler(e) {
 }
 //create project todos by using project id
 function projectEventHandler(e) {
-    activeProject = e.target.dataset.projectId
+    const projectEl = e.target.closest('.project-item')
+    if (!projectEl) return
+    activeProject = projectEl.dataset.projectId
     renderTodos(activeProject)
 }
 
-function colorTodoPriority(){
-
-}
 
 
 export function test() {
